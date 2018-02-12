@@ -1,0 +1,43 @@
+---
+title: "Ejemplo 2"
+author: "Sutanito de Tal"
+date: "8 February 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Base de datos
+La base de datos a usar es `Cars93` disponible en el paquete `MASS`. Para cargar el paquete, ver las cuatro primeras observaciones y las variables `Price`, `Origin` y `EngineSize` de la base usamos el siguiente código:
+
+```{r message=FALSE}
+require(MASS)
+Cars93[1:5, c('Price', 'Origin', 'EngineSize')]
+```
+
+La base de datos tiene `r nrow(Cars93)` observaciones y `r ncol(Cars93)` variables.
+
+## Diagrama de dispersión
+A continuación el código para dibujar un diagrama de dispersión
+
+```{r}
+plot(x=Cars93$EngineSize, y=Cars93$Price, pch=8, col='salmon')
+```
+
+## Media muestral
+La fórmula para calcular la media muestral $\bar{x}$ es la siguiente:
+$$\bar{x}=\frac{\sum_{i=1}^{n} x_i}{n}$$
+
+El código para calcular la media muestral de la variable `Price` diferenciando por el origen del vehículo es el siguiente:
+
+```{r}
+precios <- split(x=Cars93$Price, f=Cars93$Origin)
+lapply(precios, mean)
+```
+
+
+
+
+
